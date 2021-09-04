@@ -1,7 +1,7 @@
 import axios from "axios"
-export const setPizzasDis = (items/* , sort, category */) =>({
+export const setPizzasDis = (items, category, sort) =>({
     type: 'SET_PIZZAS',
-    payload: items
+    payload: {items, category, sort}
     /* {items, sort, category } */
 })
 
@@ -10,9 +10,9 @@ export const setPizzasLoaded = (payload) => ({
     payload
 })
 
-export const fetchPizzas = () => (dispatch) => {
+export const fetchPizzas = (activeCategory, activeSort) => (dispatch) => {
     dispatch(setPizzasLoaded(false));
     axios.get('http://localhost:3000/db.json').then(({data})=>{
-      dispatch(setPizzasDis(data.pizzas));
+      dispatch(setPizzasDis(data.pizzas, activeCategory, activeSort));
     });
 }

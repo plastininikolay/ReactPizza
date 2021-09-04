@@ -1,8 +1,17 @@
 import React from 'react';
 import {Link} from "react-router-dom";
 function Cart({cartTotalPrice, cartCount}) {
+    const styleCart = {
+        position: 'fixed',
+        right: '100px',
+        background: '#fff',
+        padding: '20px',
+        zIndex: '10',
+        border: '3px #fe5f1e solid',
+        borderRadius: '50px'
+    }
     return( 
-        <div className="header__cart">
+        <div style={styleCart} className="header__cart">
         <Link to="/cart" className="button button--cart">
         <span>{cartTotalPrice} ₽</span>
         <div className="button__delimiter"></div>

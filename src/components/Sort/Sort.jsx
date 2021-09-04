@@ -1,13 +1,13 @@
 import React from 'react';
-function Sort({sortList, sortChangeHandler, activeSort}) {
+function Sort({setSelectedSortState, sortList, activeSort}) {
     const [visible, setVisible] = React.useState(false);
     const setToggleHandler = () => setVisible(!visible);
-
     const style = {
         transform: visible && 'rotate(180deg)', 
         transition: 'transform 150ms ease', 
        }
     
+    const sortChangeHandler = (event) => {setSelectedSortState(event.target.innerText);  setVisible(false)};
     const sortRef = React.useRef(null);
     const outSideClickHandler = (event) => {
         const path = event.path || (event.composedPath && event.composedPath());
@@ -29,7 +29,7 @@ function Sort({sortList, sortChangeHandler, activeSort}) {
           {visible && 
           <div className="sort__popup">
           <ul>
-            {sortList.map((item, idx) => <li className={item === activeSort && 'active'} onClick={sortChangeHandler} key={idx}>{item}</li>) }
+            {sortList.map((item, idx) => <li className={item === activeSort ? 'active' : undefined} onClick={sortChangeHandler} key={idx}>{item}</li>) }
             {/* <li className="active">популярности</li>
             <li>цене</li>
             <li>алфавиту</li> */}
